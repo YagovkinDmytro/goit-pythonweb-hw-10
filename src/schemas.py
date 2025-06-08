@@ -14,6 +14,7 @@ class ContactCreateModel(BaseModel):
 
 class ContactResponseModel(ContactCreateModel):
     id: int
+
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -35,3 +36,24 @@ class ContactPatchModel(BaseModel):
     phone: Optional[str] = Field(None, min_length=7, max_length=50, example="+00123456789")
     birth_date: Optional[date] = Field(None, example="1990-01-31")
     extra_info: Optional[str] = Field(None, max_length=255, example="Some additional info")
+
+
+# Схема користувача
+class User(BaseModel):
+    id: int
+    user_name: str
+    user_email: str
+    avatar: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class UserCreate(BaseModel):
+    user_name: str
+    user_email: str
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
