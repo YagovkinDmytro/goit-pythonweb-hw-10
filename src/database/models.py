@@ -1,8 +1,8 @@
-
 from datetime import datetime
 from datetime import date
 from typing import Optional, List
-from sqlalchemy import Integer, String, Date, DateTime, func
+from sqlalchemy import text
+from sqlalchemy import Integer, String, Date, DateTime, Boolean, func
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped, relationship
 from sqlalchemy.sql.schema import ForeignKey
 
@@ -28,7 +28,6 @@ class Contact(Base):
         return f"<Contact(name={self.name}, email={self.email})>"
 
 
-
 class User(Base):
     __tablename__ = "users"
     id:Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -37,8 +36,10 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(String(255))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=func.now())
     avatar: Mapped[str] = mapped_column(String(255), nullable=True)
-    
+    confirmed: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default=text("false"))
+
     contacts: Mapped[List["Contact"]] = relationship("Contact", back_populates="user", cascade="all, delete")
 
     def __repr__(self):
         return f"<User(id={self.id}, username={self.user_name}, email={self.user_email})>"
+    

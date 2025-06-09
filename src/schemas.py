@@ -38,22 +38,26 @@ class ContactPatchModel(BaseModel):
     extra_info: Optional[str] = Field(None, max_length=255, example="Some additional info")
 
 
-# Схема користувача
+# User schemas
 class User(BaseModel):
     id: int
     user_name: str
-    user_email: str
+    user_email: EmailStr
     avatar: str
 
     model_config = ConfigDict(from_attributes=True)
 
-
+# Schema for registration request
 class UserCreate(BaseModel):
     user_name: str
-    user_email: str
+    user_email: EmailStr
     password: str
 
-
+# Scheme for the token
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+
+class RequestEmail(BaseModel):
+    user_email: EmailStr

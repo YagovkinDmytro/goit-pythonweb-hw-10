@@ -32,3 +32,8 @@ class UserRepository:
         await self.db.commit()
         await self.db.refresh(user)
         return user
+    
+    async def confirmed_user_email(self, user_email: str) -> None:
+        user = await self.get_user_by_user_email(user_email)
+        user.confirmed = True
+        await self.db.commit()

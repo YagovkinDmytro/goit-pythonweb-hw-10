@@ -1,6 +1,28 @@
 # FastAPI and REST API construction. Application architecture.
 
-# Create docker container
+## Docker / PostgreSQL
+
+### Start the project
+
+```bash
+docker-compose up -d # runs in background
+docker-compose logs -f # view logs after launch
+docker-compose up # runs and shows logs
+```
+
+### Stop the project
+
+```bash
+docker-compose down
+```
+
+### Restart the project (preserving data)
+
+```bash
+docker-compose restart
+```
+
+# Alternative to create docker container
 
 ```bash
 docker run --name db-contacts -p 5432:5432 -e POSTGRES_USER="POSTGRES_USER" -e POSTGRES_PASSWORD="POSTGRES_PASSWORD" -e POSTGRES_DB="POSTGRES_DB" -d postgres
