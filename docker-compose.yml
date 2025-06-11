@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   postgres:
     image: postgres:14
@@ -16,10 +18,12 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - backend
+
   web:
     build: .
     container_name: fastapi_app
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    # We use this command in start.sh
+    # command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       - .:/app
     ports:

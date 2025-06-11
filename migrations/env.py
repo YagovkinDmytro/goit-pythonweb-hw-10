@@ -54,6 +54,8 @@ def run_migrations_offline() -> None:
 
     with context.begin_transaction():
         context.run_migrations()
+    
+    print("Migrations applied successfully in offline mode!")
 
 
 def run_migrations(connection: Connection):
@@ -73,6 +75,8 @@ async def run_async_migrations():
         await connection.run_sync(run_migrations)
 
     await connectable.dispose()
+
+    print("Migrations applied successfully in online mode!")
 
 
 def run_migrations_online() -> None:
