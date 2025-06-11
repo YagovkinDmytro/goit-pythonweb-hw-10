@@ -2,11 +2,13 @@
 
 echo "Waiting for PostgreSQL..."
 
-# Проверяем готовность PostgreSQL
+# Checking readiness PostgreSQL
 until pg_isready -h postgres -p 5432 -U $POSTGRES_USER; do
   echo "Waiting for database..."
   sleep 2
 done
+
+sleep 2
 
 echo "Applying Alembic migrations..."
 alembic upgrade head
